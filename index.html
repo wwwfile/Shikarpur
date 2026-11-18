@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Shikarpur Sweets & Bakers</title>
+
+    <!-- Anti-Cache Meta Tags to prevent old data loading -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- App Icon & PWA Links -->
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#5c0f14">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Shikarpur Sweets">
+
+    <!-- PDF & JPG Export Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('SW Registered!', reg))
+            .catch(err => console.error('SW Registration Failed!', err));
+        });
+      }
+    </script>
+
+    <style>
+        :root {
+            --maroon-dark: #42090d;
+            --maroon-main: #631016;
+            --maroon-light: #821820;
+            --gold-piping: #f5b012;
+            --gold-light: #fff8e6;
+            --ribbon-red: #c91e25;
+        }
+
+        * { box-sizing: border-box; }
+        html, body { 
+            height: 100%; 
+            margin: 0; 
+            padding: 0; 
+            font-family: Arial, Helvetica, sans-serif; 
+            background-color: #2b0609; 
+            overflow: hidden; 
+        }
+        .container { 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+            max-width: 950px; 
+            margin: 0 auto; 
+            background: #fffdf9; 
+            padding: 8px 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            border-top: 4px solid var(--gold-piping);
+            border-bottom: 4px solid var(--gold-piping);
+            overflow-y: auto; 
+            position: relative; 
+        }
+        
+        /* Uniform Style Top Banner */
+        .brand-banner {
+            background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon-main) 50%, var(--maroon-dark) 100%);
+            border: 2px solid var(--gold-piping);
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 8px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(99, 16, 22, 0.35);
+        }
+        .brand-stars {
+            color: var(--gold-piping);
+            font-size: 11px;
+            letter-spacing: 4px;
+            margin-bottom: 2px;
+        }
+        .brand-title-main {
+            font-size: clamp(18px, 4.5vw, 27px);
+            font-weight: 900;
+            color: var(--gold-piping);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin: 0;
+            line-height: 1.15;
+            text-shadow: 
+                0 1px 0 #7a5200,
+                0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .brand-subtitle-ribbon {
+            display: inline-block;
+            background-color: var(--ribbon-red);
+            color: #ffffff;
+            font-size: clamp(10px, 2.5vw, 13px);
+            font-weight: bold;
+            padding: 2px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-piping);
+            margin-top: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Account & Controls Row */
+        .account-select-group { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            gap: 8px; 
+            width: 100%;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #f0e1c6;
+            flex-wrap: wrap;
+        }
+        .account-select-group label {
+            font-size: 13px; 
+            font-weight: bold; 
+            color: var(--maroon-dark);
+            white-space: nowrap;
+        }
+        .account-select { 
+            padding: 5px 10px; 
+            font-size: clamp(12px, 0.8vw + 8px, 14px); 
+            border-radius: 4px; 
+            border: 1.5px solid var(--maroon-main); 
+            background-color: var(--gold-light); 
+            font-weight: bold; 
+            color: var(--maroon-main); 
+            cursor: pointer; 
+            outline: none;
+        }
+
+        /* Export & Language Buttons */
+        .export-btn-group {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+        .export-btn {
+            flex: 1;
+            padding: 6px 2px;
+            border: 1px solid rgba(245, 176, 18, 0.5);
+            border-radius: 4px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+            transition: opacity 0.2s;
+        }
+        .export-btn:hover { opacity: 0.9; }
+        .btn-lang { background-color: var(--maroon-main); color: var(--gold-piping); border-color: var(--gold-piping); }
+        .btn-pdf { background-color: #b81c24; }
+        .btn-jpg { background-color: #b37400; }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+        .summary-card {
+            flex: 1;
+            padding: 6px 4px;
+            border-radius: 6px;
+            text-align: center;
+            color: white;
+            border-bottom: 3px solid var(--gold-piping);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+        }
+        .card-received { background: linear-gradient(135deg, #1b6b36, #288f4a); }
+        .card-sent { background: linear-gradient(135deg, var(--maroon-dark), var(--maroon-light)); }
+        .card-total { background: linear-gradient(135deg, #9e6300, #cf8508); }
+        
+        .card-personal-exp { background: linear-gradient(135deg, #4c236e, #673294); }
+        .card-partner-exp { background: linear-gradient(135deg, #9c3c08, #c75212); }
+        .card-net-calc { background: linear-gradient(135deg, #0d695b, #158f7d); }
+
+        .summary-card h4 { margin: 1px 0 0 0; font-size: 11px; text-transform: uppercase; }
+        .summary-card p { margin: 3px 0 0 0; font-size: 14px; font-weight: bold; }
+
+        /* Table Portion */
+        .table-portion { 
+            flex: 1 1 auto; 
+            overflow-y: auto; 
+            overflow-x: auto; 
+            margin-top: 2px; 
+            border: 2px solid var(--maroon-main);
+            border-radius: 5px;
+            width: 100%; 
+            position: relative; 
+            -webkit-overflow-scrolling: touch; 
+        }
+        table { 
+            width: 100%; 
+            min-width: 445px; 
+            border-collapse: collapse; 
+            table-layout: fixed;
+        }
+        th, td { 
+            border: 1px solid #e6d3b3; 
+            padding: 5px 3px; 
+            text-align: center; 
+            font-size: 11px !important; 
+            vertical-align: middle; 
+            word-wrap: break-word; 
+        }
+        th { 
+            background-color: var(--maroon-main); 
+            color: var(--gold-piping); 
+            font-weight: bold; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
+            line-height: 1.2; 
+            border-bottom: 2px solid var(--gold-piping);
+        }
+        tr:nth-child(even) { background-color: #fdf6e9; }
+        tr:nth-child(odd) { background-color: #ffffff; }
+        tbody tr { height: 32px; }
+
+        .date-cell { line-height: 1.15; white-space: normal; }
+        
+        .text-right { text-align: right !important; padding-right: 6px !important; }
+        .text-left { text-align: left !important; padding-left: 6px !important; }
+        
+        /* Alignment classes based on text script */
+        .urdu-desc-align {
+            text-align: right !important;
+            padding-right: 6px !important;
+            direction: rtl !important;
+        }
+        .english-desc-align {
+            text-align: left !important;
+            padding-left: 6px !important;
+            direction: ltr !important;
+        }
+
+        /* Header alignment based on page language */
+        html[lang="ur"] .th-desc-header {
+            text-align: right !important;
+            padding-right: 6px !important;
+        }
+        html[lang="en"] .th-desc-header {
+            text-align: left !important;
+            padding-left: 6px !important;
+        }
+
+        /* Inline Editable Cells */
+        td.editable-cell { cursor: pointer; position: relative; }
+        td.editable-cell:hover { background-color: #fcebc2; }
+        .inline-edit-input {
+            width: 100% !important;
+            height: 100% !important;
+            padding: 3px 2px !important;
+            border: 2px solid var(--maroon-main) !important;
+            border-radius: 2px !important;
+            font-size: inherit !important;
+            background: #ffffff !important;
+            outline: none !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Footer Add Form */
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background: #ffffff;
+            z-index: 10;
+        }
+        tfoot td {
+            background-color: var(--gold-light);
+            border-top: 2px solid var(--maroon-main);
+            padding: 4px 2px !important;
+        }
+        .add-row-form input {
+            width: 100% !important;
+            padding: 3px 2px !important;
+            border: 1px solid var(--maroon-main);
+            border-radius: 3px;
+            font-size: 11px !important;
+            background: #fff;
+            outline: none;
+        }
+        .add-row-form input[type="number"] { text-align: right !important; padding-right: 4px !important; direction: ltr;}
+        .add-row-form input[type="text"] { text-align: left !important; padding-left: 4px !important; }
+        
+        html[lang="ur"] .desc-input {
+            text-align: right !important;
+            padding-right: 4px !important;
+            direction: rtl;
+        }
+
+        .add-btn { 
+            background-color: var(--maroon-main); 
+            color: var(--gold-piping); 
+            border: 1px solid var(--gold-piping); 
+            padding: 4px 6px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%; 
+            font-size: 11px; 
+            box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+        }
+        .add-btn:hover { background-color: var(--maroon-dark); }
+
+        /* Action Buttons */
+        .action-btns { display: flex; justify-content: center; align-items: center; gap: 4px; }
+        .icon-btn { background: none; border: none; cursor: pointer; padding: 2px; display: inline-flex; align-items: center; justify-content: center; border-radius: 3px; }
+        .edit-icon-btn { color: #6c757d; }
+        .edit-icon-btn:hover { background-color: #fcebc2; color: var(--maroon-main); }
+        .delete-icon-btn { color: #6c757d; }
+        .delete-icon-btn:hover { background-color: #f8d7da; color: #dc3545; }
+        .icon-btn svg { width: 14px; height: 14px; }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none; justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+        .modal-box {
+            background: #fffdf9;
+            width: 90%; max-width: 380px;
+            border-radius: 8px;
+            border: 2px solid var(--gold-piping);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .modal-header {
+            background: var(--maroon-main);
+            color: var(--gold-piping);
+            border-bottom: 2px solid var(--gold-piping);
+            padding: 10px 14px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 15px; font-weight: bold;
+        }
+        .modal-close-btn {
+            background: none; border: none; color: var(--gold-piping);
+            font-size: 20px; cursor: pointer; line-height: 1;
+        }
+        .modal-body {
+            padding: 14px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .modal-group { display: flex; flex-direction: column; gap: 3px; }
+        .modal-group label { font-size: 11px; font-weight: bold; color: var(--maroon-dark); text-transform: uppercase; }
+        .modal-input {
+            padding: 8px; border: 1px solid #c9b497; border-radius: 4px;
+            font-size: 13px; outline: none; width: 100%;
+        }
+        .modal-input:focus { border-color: var(--maroon-main); }
+        
+        html[lang="ur"] .modal-input-desc {
+            text-align: right !important;
+            direction: rtl;
+        }
+
+        .modal-footer {
+            padding: 10px 14px; background: var(--gold-light);
+            border-top: 1px solid #e6d3b3;
+            display: flex; justify-content: flex-end; gap: 8px;
+        }
+        .modal-btn-cancel {
+            background: #ffffff; border: 1px solid #ccc; color: #333;
+            padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px;
+        }
+        .modal-btn-save {
+            background: var(--maroon-main); border: 1px solid var(--gold-piping); color: var(--gold-piping);
+            padding: 6px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px;
+        }
+
+        .footer-text { 
+            text-align: center; 
+            font-size: clamp(11px, 0.6vw + 7px, 13px); 
+            font-weight: bold; 
+            color: var(--maroon-main); 
+            margin-top: 8px; 
+            margin-bottom: 2px; 
+        }
+
+        /* EXPORT MODE CSS */
+        .export-mode {
+            height: auto !important;
+            overflow: visible !important;
+            padding: 10px !important;
+            width: 500px !important; 
+            max-width: 500px !important;
+            margin: 0 auto !important;
+            text-rendering: geometricPrecision !important; 
+        }
+        .export-mode * {
+            letter-spacing: normal !important; 
+        }
+        .export-mode .table-portion {
+            overflow: visible !important;
+            width: 100% !important;
+            border: 2px solid var(--maroon-main) !important;
+        }
+        .export-mode table {
+            width: 100% !important;
+            min-width: 445px !important; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <div>
+            <!-- Top Uniform-Themed Brand Banner -->
+            <div class="brand-banner">
+                <div class="brand-stars">★ ★ ★ ★ ★</div>
+                <div class="brand-title-main" data-i18n="brand-main">New Shikarpur</div>
+                <div class="brand-subtitle-ribbon" data-i18n="brand-sub">Sweets &amp; Bakers</div>
+            </div>
+
+            <!-- Accounts Dropdown & Quick Add -->
+            <div id="account-select-row" class="account-select-group">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="account-filter" data-i18n="sel-acc">Select Account: </label>
+                    <select id="account-filter" class="account-select">
+                        <option value="Main">Main</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Partner">Partner</option>
+                        <option value="Full Detail" data-i18n="opt-full">Full Detail</option>
+                    </select>
+                </div>
+                <button type="button" id="open-add-modal-btn" class="add-btn" style="width: auto; padding: 5px 12px;" data-i18n="add-btn">+ Add New Entry</button>
+            </div>
+
+            <!-- Export & Language Buttons -->
+            <div class="export-btn-group" id="export-buttons-group">
+                <button type="button" class="export-btn btn-lang" id="btn-english">English</button>
+                <button type="button" class="export-btn btn-lang" id="btn-urdu">Urdu</button>
+                <button type="button" class="export-btn btn-pdf" id="btn-pdf">PDF</button>
+                <button type="button" class="export-btn btn-jpg" id="btn-jpg">JPG</button>
+            </div>
+
+            <!-- Summary Totals (1st line cards) -->
+            <div class="summary-cards" id="summary-cards-container">
+                <div class="summary-card card-received" id="card-1">
+                    <span style="font-size: 10px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-1">MAIN ACCOUNT</span>
+                    <h4 data-i18n="t-rec">Total Received</h4>
+                    <p id="total-received">0</p>
+                </div>
+                <div class="summary-card card-sent" id="card-2">
+                    <span style="font-size: 10px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-2">MAIN ACCOUNT</span>
+                    <h4 data-i18n="t-snt">Total Sent</h4>
+                    <p id="total-sent">0</p>
+                </div>
+                <div class="summary-card card-total" id="card-3">
+                    <span style="font-size: 10px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-3">MAIN ACCOUNT</span>
+                    <h4 data-i18n="bal">Balance</h4>
+                    <p id="total-balance">0</p>
+                </div>
+            </div>
+
+            <!-- Main Account Extra Summary Cards (2nd line cards) -->
+            <div id="main-breakdown-cards" class="summary-cards" style="display: none;">
+                <div class="summary-card card-personal-exp" id="sub-card-1">
+                    <h4 data-i18n="p-exp">Personal Expense</h4>
+                    <p id="personal-expense-total">0</p>
+                </div>
+                <div class="summary-card card-partner-exp" id="sub-card-2">
+                    <h4 data-i18n="pt-exp">Partner Expense</h4>
+                    <p id="partner-expense-total">0</p>
+                </div>
+                <div class="summary-card card-net-calc" id="sub-card-3">
+                    <h4 data-i18n="n-rem">Net Remaining</h4>
+                    <p id="net-remaining-total">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Portion -->
+        <div id="table-container" class="table-portion">
+            <table id="main-view-table">
+                <thead>
+                    <tr id="table-header-row">
+                        <th style="width: 7%;" data-i18n="th-sno">Sr.No</th>
+                        <th style="width: 9%;" data-i18n="th-dt">Date</th>
+                        <th style="width: 31%;" class="th-desc-header" data-i18n="th-ds">Description</th>
+                        <th style="width: 17%;" class="text-right" data-i18n="th-ar">Amount<br>Received</th>
+                        <th style="width: 17%;" class="text-right" data-i18n="th-as">Amount<br>Send</th>
+                        <th style="width: 19%;" class="text-right" data-i18n="th-to">Total</th>
+                        <th style="width: 10%;" data-i18n="th-ac" id="action-header">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="expense-list">
+                    <tr>
+                        <td colspan="7" style="color: #666; padding: 10px;">Loading data...</td>
+                    </tr>
+                </tbody>
+                <tfoot id="table-footer">
+                    <tr class="add-row-form">
+                        <td id="next-sno" style="font-weight: bold; color: #631016;">1</td>
+                        <td><input type="date" id="new-date"></td>
+                        <td><input type="text" id="new-desc" class="desc-input" data-i18n-place="th-ds-place" placeholder="Description"></td>
+                        <td><input type="number" id="new-received" placeholder="0" step="any"></td>
+                        <td><input type="number" id="new-sent" placeholder="0" step="any"></td>
+                        <td class="text-right" style="font-weight: bold; color: #666;">-</td>
+                        <td><button type="button" id="quick-add-btn" class="add-btn" data-i18n="add-short">Add</button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div id="created-by-container">
+            <div class="footer-text" data-i18n="ft-cr">Created by Sharifuddin</div>
+        </div>
+    </div>
+
+    <!-- Edit Entry Modal Popup -->
+    <div id="edit-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span data-i18n="mod-edit">Edit Entry</span>
+                <button type="button" class="modal-close-btn" id="modal-close-x">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-doc-id">
+                <div class="modal-group">
+                    <label data-i18n="th-dt">Date</label>
+                    <input type="date" id="modal-date" class="modal-input">
+                </div>
+                <div class="modal-group">
+                    <label data-i18n="th-ds">Description</label>
+                    <input type="text" id="modal-desc" class="modal-input modal-input-desc" placeholder="Description">
+                </div>
+                <div class="modal-group">
+                    <label data-i18n="mod-rec">Amount Received</label>
+                    <input type="number" id="modal-received" class="modal-input" step="any">
+                </div>
+                <div class="modal-group">
+                    <label data-i18n="mod-snt">Amount Sent</label>
+                    <input type="number" id="modal-sent" class="modal-input" step="any">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn-cancel" id="modal-btn-cancel" data-i18n="btn-can">Cancel</button>
+                <button type="button" class="modal-btn-save" id="modal-btn-save" data-i18n="btn-sav">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Entry Modal Popup -->
+    <div id="add-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span data-i18n="mod-add">Add New Entry</span>
+                <button type="button" class="modal-close-btn" id="add-modal-close-x">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-group">
+                    <label data-i18n="th-dt">Date</label>
+                    <input type="date" id="add-modal-date" class="modal-input">
+                </div>
+                <div class="modal-group">
+                    <label data-i18n="th-ds">Description</label>
+                    <input type="text" id="add-modal-desc" class="modal-input modal-input-desc" placeholder="Description">
+                </div>
+                <div class="modal-group">
+                    <label data-i18n="mod-rec">Amount Received</label>
+                    <input type="number" id="add-modal-received" class="modal-input" step="any" placeholder="0">
+                </div>
+                <div class="modal-group">
+                    <label data-i18n="mod-snt">Amount Sent</label>
+                    <input type="number" id="add-modal-sent" class="modal-input" step="any" placeholder="0">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn-cancel" id="add-modal-btn-cancel" data-i18n="btn-can">Cancel</button>
+                <button type="button" class="modal-btn-save" id="add-modal-btn-save" data-i18n="btn-add">Add Entry</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Force reload if loaded from browser back/forward cache
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+
+        // Firebase CDN Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getFirestore, collection, addDoc, onSnapshot, deleteDoc, 
+            updateDoc, doc, query, orderBy, serverTimestamp 
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMN4Zz4sfepAEhOPF33Y4lqDkLAJlvKKo",
+            authDomain: "adnan-7a82d.firebaseapp.com",
+            projectId: "adnan-7a82d",
+            storageBucket: "adnan-7a82d.firebasestorage.app",
+            messagingSenderId: "649815030816",
+            appId: "1:649815030816:web:e420cabfdd8be9e4735045",
+            measurementId: "G-558P0SFEZN"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const expensesRef = collection(db, "ceo_expenses");
+        const q = query(expensesRef, orderBy("createdAt", "asc"));
+
+        const accountFilter = document.getElementById('account-filter');
+        const expenseList = document.getElementById('expense-list');
+        const nextSnoEl = document.getElementById('next-sno');
+
+        let allExpensesData = [];
+
+        function formatNumber(num) {
+            if (num === undefined || num === null || isNaN(num)) return '0';
+            return Number(num).toLocaleString('en-IN');
+        }
+
+        function formatDateDisplay(dateStr) {
+            if (!dateStr) return '-';
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+                return `${parts[2]}-${parts[1]}<br>${parts[0]}`;
+            }
+            return dateStr;
+        }
+
+        function getTodayDateString() {
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        if (document.getElementById('new-date')) {
+            document.getElementById('new-date').value = getTodayDateString();
+        }
+        if (document.getElementById('add-modal-date')) {
+            document.getElementById('add-modal-date').value = getTodayDateString();
+        }
+
+        function makeCellEditable(td, docId, fieldName, currentVal, inputType = 'text') {
+            td.classList.add('editable-cell');
+            td.addEventListener('dblclick', (e) => {
+                if (e.target.tagName === 'BUTTON' || td.querySelector('input')) return;
+                e.stopPropagation();
+
+                const input = document.createElement('input');
+                input.type = inputType;
+                input.className = 'inline-edit-input desc-input';
+                input.value = currentVal !== undefined && currentVal !== null ? currentVal : '';
+
+                if (inputType === 'number') { input.style.textAlign = 'right'; input.step = 'any'; input.style.direction = 'ltr'; } 
+
+                td.innerHTML = '';
+                td.appendChild(input);
+                input.focus();
+                if (inputType === 'text' || inputType === 'number') input.select();
+
+                let isSaved = false;
+                const saveChanges = async () => {
+                    if (isSaved) return;
+                    isSaved = true;
+                    let newVal = input.value;
+                    if (inputType === 'number') newVal = parseFloat(newVal) || 0;
+                    else newVal = newVal.trim();
+
+                    if (newVal !== currentVal) {
+                        try {
+                            await updateDoc(doc(db, "ceo_expenses", docId), { [fieldName]: newVal });
+                        } catch (err) { console.error("Update error:", err); renderData(); }
+                    } else { renderData(); }
+                };
+
+                input.addEventListener('blur', saveChanges);
+                input.addEventListener('keydown', (ke) => {
+                    if (ke.key === 'Enter') input.blur();
+                    if (ke.key === 'Escape') { isSaved = true; renderData(); }
+                });
+            });
+        }
+
+        function renderData() {
+            const selectedAccount = accountFilter.value.toLowerCase().trim();
+            const currentLang = document.documentElement.lang || 'en';
+            expenseList.innerHTML = '';
+
+            let count = 1;
+            let totalRec = 0;
+            let totalSent = 0;
+            let runningTotal = 0;
+
+            const isFullDetail = (selectedAccount === 'full detail');
+
+            const headerRow = document.getElementById('table-header-row');
+            const tableFooter = document.getElementById('table-footer');
+            const openAddModalBtn = document.getElementById('open-add-modal-btn');
+
+            if (isFullDetail) {
+                tableFooter.style.display = 'none';
+                openAddModalBtn.style.display = 'none';
+                headerRow.innerHTML = `
+                    <th style="width: 7%;" data-i18n="th-sno">${translations[currentLang]["th-sno"]}</th>
+                    <th style="width: 9%;" data-i18n="th-dt">${translations[currentLang]["th-dt"]}</th>
+                    <th style="width: 31%;" class="th-desc-header" data-i18n="th-ds">${translations[currentLang]["th-ds"]}</th>
+                    <th style="width: 17%;" class="text-right" data-i18n="th-ar">${translations[currentLang]["th-ar"]}</th>
+                    <th style="width: 17%;" class="text-right" data-i18n="th-as">${translations[currentLang]["th-as"]}</th>
+                    <th style="width: 19%;" class="text-right" data-i18n="th-to">${translations[currentLang]["th-to"]}</th>
+                `;
+            } else {
+                tableFooter.style.display = '';
+                openAddModalBtn.style.display = '';
+                headerRow.innerHTML = `
+                    <th style="width: 7%;" data-i18n="th-sno">${translations[currentLang]["th-sno"]}</th>
+                    <th style="width: 9%;" data-i18n="th-dt">${translations[currentLang]["th-dt"]}</th>
+                    <th style="width: 31%;" class="th-desc-header" data-i18n="th-ds">${translations[currentLang]["th-ds"]}</th>
+                    <th style="width: 17%;" class="text-right" data-i18n="th-ar">${translations[currentLang]["th-ar"]}</th>
+                    <th style="width: 17%;" class="text-right" data-i18n="th-as">${translations[currentLang]["th-as"]}</th>
+                    <th style="width: 19%;" class="text-right" data-i18n="th-to">${translations[currentLang]["th-to"]}</th>
+                    <th style="width: 10%;" data-i18n="th-ac" id="action-header">${translations[currentLang]["th-ac"]}</th>
+                `;
+            }
+
+            const filteredData = isFullDetail ? allExpensesData : allExpensesData.filter(item => {
+                const acc = (item.expense.account || '').toLowerCase().trim();
+                return acc === selectedAccount;
+            });
+
+            if (filteredData.length === 0) {
+                const colspanVal = isFullDetail ? 6 : 7;
+                expenseList.innerHTML = `<tr><td colspan="${colspanVal}" style="color: #666; padding: 12px;">No records found</td></tr>`;
+            }
+
+            filteredData.forEach(item => {
+                const expense = item.expense;
+                const id = item.id;
+                const rec = parseFloat(expense.received) || 0;
+                const sent = parseFloat(expense.sent) || 0;
+
+                totalRec += rec;
+                totalSent += sent;
+                runningTotal += (rec - sent);
+
+                const tr = document.createElement('tr');
+                const tdSno = document.createElement('td'); tdSno.innerText = count++;
+                
+                const tdDate = document.createElement('td'); 
+                tdDate.className = 'date-cell'; 
+                tdDate.innerHTML = formatDateDisplay(expense.date);
+                if (!isFullDetail) makeCellEditable(tdDate, id, 'date', expense.date || '', 'date');
+
+                const tdDesc = document.createElement('td'); 
+                const descText = expense.desc || '-';
+                
+                const hasUrdu = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/.test(descText);
+
+                if (hasUrdu) {
+                    tdDesc.className = 'urdu-desc-align';
+                } else {
+                    tdDesc.className = 'english-desc-align';
+                }
+
+                tdDesc.innerText = descText;
+                if (!isFullDetail) makeCellEditable(tdDesc, id, 'desc', expense.desc || '', 'text');
+
+                const tdRec = document.createElement('td'); 
+                tdRec.className = 'text-right'; tdRec.style.color = '#1b6b36'; tdRec.style.fontWeight = 'bold';
+                tdRec.innerText = formatNumber(rec);
+                if (!isFullDetail) makeCellEditable(tdRec, id, 'received', rec, 'number');
+
+                const tdSent = document.createElement('td'); 
+                tdSent.className = 'text-right'; tdSent.style.color = '#b81c24'; tdSent.style.fontWeight = 'bold';
+                tdSent.innerText = formatNumber(sent);
+                if (!isFullDetail) makeCellEditable(tdSent, id, 'sent', sent, 'number');
+
+                const tdTot = document.createElement('td'); 
+                tdTot.className = 'text-right'; tdTot.style.fontWeight = 'bold'; tdTot.innerText = formatNumber(runningTotal);
+
+                if (isFullDetail) {
+                    tr.append(tdSno, tdDate, tdDesc, tdRec, tdSent, tdTot);
+                } else {
+                    const tdAction = document.createElement('td');
+                    tdAction.className = 'action-col-content'; 
+                    tdAction.innerHTML = `
+                        <div class="action-btns">
+                            <button class="icon-btn edit-icon-btn edit-btn" data-id="${id}" data-date="${expense.date || ''}" data-desc="${expense.desc || ''}" data-received="${rec}" data-sent="${sent}" title="Edit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </button>
+                            <button class="icon-btn delete-icon-btn delete-btn" data-id="${id}" title="Delete">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            </button>
+                        </div>
+                    `;
+                    tr.append(tdSno, tdDate, tdDesc, tdRec, tdSent, tdTot, tdAction);
+                }
+
+                expenseList.appendChild(tr);
+            });
+
+            if (nextSnoEl) nextSnoEl.innerText = count;
+
+            const mainBalance = totalRec - totalSent;
+            document.getElementById('total-received').innerText = formatNumber(totalRec);
+            document.getElementById('total-sent').innerText = formatNumber(totalSent);
+            document.getElementById('total-balance').innerText = formatNumber(mainBalance);
+
+            if (selectedAccount === 'main' || isFullDetail) {
+                document.getElementById('main-breakdown-cards').style.display = 'flex';
+                let personalExp = 0, partnerExp = 0;
+                allExpensesData.forEach(item => {
+                    const acc = (item.expense.account || '').toLowerCase().trim();
+                    const sentAmt = parseFloat(item.expense.sent) || 0;
+                    if (acc === 'personal') personalExp += sentAmt;
+                    else if (acc === 'partner') partnerExp += sentAmt;
+                });
+                document.getElementById('personal-expense-total').innerText = formatNumber(personalExp);
+                document.getElementById('partner-expense-total').innerText = formatNumber(partnerExp);
+                document.getElementById('net-remaining-total').innerText = formatNumber(mainBalance - personalExp - partnerExp);
+            } else {
+                document.getElementById('main-breakdown-cards').style.display = 'none';
+            }
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    if (confirm("Kiya aap is entry ko delete karna chahte hain?")) {
+                        await deleteDoc(doc(db, "ceo_expenses", e.currentTarget.getAttribute('data-id')));
+                    }
+                });
+            });
+
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const b = e.currentTarget;
+                    document.getElementById('edit-doc-id').value = b.getAttribute('data-id');
+                    document.getElementById('modal-date').value = b.getAttribute('data-date');
+                    document.getElementById('modal-desc').value = b.getAttribute('data-desc');
+                    document.getElementById('modal-received').value = b.getAttribute('data-received');
+                    document.getElementById('modal-sent').value = b.getAttribute('data-sent');
+                    document.getElementById('edit-modal').style.display = 'flex';
+                });
+            });
+        }
+
+        onSnapshot(q, (snapshot) => {
+            allExpensesData = [];
+            snapshot.forEach((docSnap) => allExpensesData.push({ id: docSnap.id, expense: docSnap.data() }));
+            renderData();
+        });
+
+        // Quick Add Logic (Footer)
+        document.getElementById('quick-add-btn').addEventListener('click', async () => {
+            const desc = document.getElementById('new-desc').value.trim();
+            if (!desc) return alert("Description required!");
+            await addDoc(expensesRef, {
+                account: accountFilter.value,
+                date: document.getElementById('new-date').value || getTodayDateString(),
+                desc: desc,
+                received: parseFloat(document.getElementById('new-received').value) || 0,
+                sent: parseFloat(document.getElementById('new-sent').value) || 0,
+                createdAt: serverTimestamp()
+            });
+            document.getElementById('new-desc').value = '';
+            document.getElementById('new-received').value = '';
+            document.getElementById('new-sent').value = '';
+        });
+
+        // Popup Add Modal Save Logic
+        document.getElementById('add-modal-btn-save').addEventListener('click', async () => {
+            const desc = document.getElementById('add-modal-desc').value.trim();
+            if (!desc) return alert("Description required!");
+            await addDoc(expensesRef, {
+                account: accountFilter.value,
+                date: document.getElementById('add-modal-date').value || getTodayDateString(),
+                desc: desc,
+                received: parseFloat(document.getElementById('add-modal-received').value) || 0,
+                sent: parseFloat(document.getElementById('add-modal-sent').value) || 0,
+                createdAt: serverTimestamp()
+            });
+            document.getElementById('add-modal-desc').value = '';
+            document.getElementById('add-modal-received').value = '';
+            document.getElementById('add-modal-sent').value = '';
+            document.getElementById('add-modal').style.display = 'none';
+        });
+
+        // Popup Edit Modal Save Logic
+        document.getElementById('modal-btn-save').addEventListener('click', async () => {
+            const docId = document.getElementById('edit-doc-id').value;
+            const desc = document.getElementById('modal-desc').value.trim();
+            if (!docId || !desc) return alert("Description required!");
+            await updateDoc(doc(db, "ceo_expenses", docId), {
+                date: document.getElementById('modal-date').value,
+                desc: desc,
+                received: parseFloat(document.getElementById('modal-received').value) || 0,
+                sent: parseFloat(document.getElementById('modal-sent').value) || 0
+            });
+            document.getElementById('edit-modal').style.display = 'none';
+        });
+
+        // UI toggles
+        document.getElementById('open-add-modal-btn').addEventListener('click', () => {
+            document.getElementById('add-modal-date').value = getTodayDateString();
+            document.getElementById('add-modal').style.display = 'flex';
+        });
+        document.getElementById('add-modal-close-x').addEventListener('click', () => document.getElementById('add-modal').style.display = 'none');
+        document.getElementById('add-modal-btn-cancel').addEventListener('click', () => document.getElementById('add-modal').style.display = 'none');
+        document.getElementById('modal-close-x').addEventListener('click', () => document.getElementById('edit-modal').style.display = 'none');
+        document.getElementById('modal-btn-cancel').addEventListener('click', () => document.getElementById('edit-modal').style.display = 'none');
+
+        accountFilter.addEventListener('change', renderData);
+
+        /* ==============================================
+           LANGUAGE TRANSLATION, SCROLL & LAYOUT LOGIC
+           ============================================== */
+        const translations = {
+            en: {
+                "brand-main": "New Shikarpur",
+                "brand-sub": "Sweets & Bakers",
+                "sel-acc": "Select Account:",
+                "opt-full": "Full Detail",
+                "add-btn": "+ Add New Entry",
+                "m-acc-1": "MAIN ACCOUNT",
+                "m-acc-2": "MAIN ACCOUNT",
+                "m-acc-3": "MAIN ACCOUNT",
+                "t-rec": "Total Received",
+                "t-snt": "Total Sent",
+                "bal": "Balance",
+                "p-exp": "Personal Expense",
+                "pt-exp": "Partner Expense",
+                "n-rem": "Net Remaining",
+                "th-sno": "Sr.No",
+                "th-dt": "Date",
+                "th-ds": "Description",
+                "th-ar": "Amount<br>Received",
+                "th-as": "Amount<br>Send",
+                "th-to": "Total",
+                "th-ac": "Action",
+                "add-short": "Add",
+                "ft-cr": "Created by Sharifuddin",
+                "mod-edit": "Edit Entry",
+                "mod-add": "Add New Entry",
+                "mod-rec": "Amount Received",
+                "mod-snt": "Amount Sent",
+                "btn-can": "Cancel",
+                "btn-sav": "Save",
+                "btn-add": "Add Entry"
+            },
+            ur: {
+                "brand-main": "نیو شکارپور",
+                "brand-sub": "سوئیٹس اینڈ بیکرز",
+                "sel-acc": "اکاؤنٹ منتخب کریں:",
+                "opt-full": "مکمل تفصیل",
+                "add-btn": "+ نئی انٹری",
+                "m-acc-1": "مین اکاؤنٹ",
+                "m-acc-2": "مین اکاؤنٹ",
+                "m-acc-3": "مین اکاؤنٹ",
+                "t-rec": "کل وصول",
+                "t-snt": "کل ادا",
+                "bal": "بقیہ",
+                "p-exp": "ذاتی خرچ",
+                "pt-exp": "پارٹنر خرچ",
+                "n-rem": "خالص بقیہ",
+                "th-sno": "نمبر",
+                "th-dt": "تاریخ",
+                "th-ds": "تفصیل",
+                "th-ar": "وصول<br>رقم",
+                "th-as": "ادا<br>رقم",
+                "th-to": "کل",
+                "th-ac": "عمل",
+                "add-short": "شامل",
+                "ft-cr": "شریف الدین کی طرف سے تیار کردہ",
+                "mod-edit": "انٹری تبدیل کریں",
+                "mod-add": "نئی انٹری شامل کریں",
+                "mod-rec": "وصول رقم",
+                "mod-snt": "ادا رقم",
+                "btn-can": "منسوخ کریں",
+                "btn-sav": "محفوظ کریں",
+                "btn-add": "شامل کریں"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang; 
+            const mainTable = document.getElementById('main-view-table');
+            const tableContainer = document.getElementById('table-container');
+            const cardsContainer = document.getElementById('summary-cards-container');
+            const card1 = document.getElementById('card-1');
+            const card2 = document.getElementById('card-2');
+            const card3 = document.getElementById('card-3');
+
+            const subCardsContainer = document.getElementById('main-breakdown-cards');
+            const subCard1 = document.getElementById('sub-card-1');
+            const subCard2 = document.getElementById('sub-card-2');
+            const subCard3 = document.getElementById('sub-card-3');
+            
+            if (lang === 'ur') {
+                mainTable.dir = 'rtl';
+                cardsContainer.append(card3, card2, card1);
+                subCardsContainer.append(subCard3, subCard2, subCard1);
+
+                setTimeout(() => {
+                    tableContainer.scrollLeft = tableContainer.scrollWidth;
+                }, 50);
+            } else {
+                mainTable.dir = 'ltr';
+                cardsContainer.append(card1, card2, card3);
+                subCardsContainer.append(subCard1, subCard2, subCard3);
+
+                setTimeout(() => {
+                    tableContainer.scrollLeft = 0;
+                }, 50);
+            }
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-place]').forEach(el => {
+                const key = el.getAttribute('data-i18n-place');
+                if (key === 'th-ds-place') {
+                    el.placeholder = (lang === 'ur') ? "تفصیل" : "Description";
+                }
+            });
+            document.querySelectorAll('.modal-input-desc').forEach(el => {
+                 el.placeholder = (lang === 'ur') ? "تفصیل" : "Description";
+            });
+
+            renderData(); 
+        }
+
+        setLanguage('en'); 
+
+        document.getElementById('btn-english').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('btn-urdu').addEventListener('click', () => setLanguage('ur'));
+
+        /* ==============================================
+           EXPORT LOGIC
+           ============================================== */
+        function prepareForExport() {
+            const container = document.getElementById('main-container');
+            container.classList.add('export-mode');
+            
+            document.getElementById('export-buttons-group').style.display = 'none';
+            document.getElementById('account-select-row').style.display = 'none';
+            document.getElementById('table-footer').style.display = 'none';
+            const actionHdr = document.getElementById('action-header');
+            if (actionHdr) actionHdr.style.display = 'none';
+            document.querySelectorAll('.action-col-content').forEach(el => el.style.display = 'none');
+        }
+
+        function restoreAfterExport() {
+            const container = document.getElementById('main-container');
+            container.classList.remove('export-mode');
+            
+            document.getElementById('export-buttons-group').style.display = 'flex';
+            document.getElementById('account-select-row').style.display = 'flex';
+            
+            const selectedAccount = accountFilter.value.toLowerCase().trim();
+            if (selectedAccount !== 'full detail') {
+                document.getElementById('table-footer').style.display = '';
+            }
+            
+            const actionHdr = document.getElementById('action-header');
+            if (actionHdr) actionHdr.style.display = '';
+            document.querySelectorAll('.action-col-content').forEach(el => el.style.display = '');
+        }
+
+        document.getElementById('btn-jpg').addEventListener('click', () => {
+            prepareForExport();
+            const container = document.getElementById('main-container');
+            
+            html2canvas(container, { 
+                scale: 2, 
+                useCORS: true,
+                backgroundColor: '#fffdf9',
+                letterRendering: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `Shikarpur-Sweets-${getTodayDateString()}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+                restoreAfterExport();
+            }).catch(err => {
+                console.error(err);
+                restoreAfterExport();
+            });
+        });
+
+        document.getElementById('btn-pdf').addEventListener('click', () => {
+            prepareForExport();
+            const container = document.getElementById('main-container');
+            
+            const opt = {
+                margin:       15,
+                filename:     `Shikarpur-Sweets-${getTodayDateString()}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    backgroundColor: '#fffdf9',
+                    letterRendering: true 
+                },
+                jsPDF: { 
+                    unit: 'px', 
+                    format: [560, 800], 
+                    orientation: 'portrait' 
+                }
+            };
+
+            html2pdf().set(opt).from(container).save().then(() => {
+                restoreAfterExport();
+            }).catch(err => {
+                console.error(err);
+                restoreAfterExport();
+            });
+        });
+
+    </script>
+</body>
+</html>
