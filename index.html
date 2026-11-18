@@ -603,22 +603,24 @@
 
         // Firebase CDN Imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
         import { 
             getFirestore, collection, addDoc, onSnapshot, deleteDoc, 
             updateDoc, doc, query, orderBy, serverTimestamp 
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyDMN4Zz4sfepAEhOPF33Y4lqDkLAJlvKKo",
-            authDomain: "adnan-7a82d.firebaseapp.com",
-            projectId: "adnan-7a82d",
-            storageBucket: "adnan-7a82d.firebasestorage.app",
-            messagingSenderId: "649815030816",
-            appId: "1:649815030816:web:e420cabfdd8be9e4735045",
-            measurementId: "G-558P0SFEZN"
+            apiKey: "AIzaSyBk5QTfLFkIWc4_o2jfdnfb47eyLxLGvvw",
+            authDomain: "new-shikarpur.firebaseapp.com",
+            projectId: "new-shikarpur",
+            storageBucket: "new-shikarpur.firebasestorage.app",
+            messagingSenderId: "371895828651",
+            appId: "1:371895828651:web:3218e803b6256cb16ef7ee",
+            measurementId: "G-TP202XQMM9"
         };
 
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
         const db = getFirestore(app);
         const expensesRef = collection(db, "ceo_expenses");
         const q = query(expensesRef, orderBy("createdAt", "asc"));
