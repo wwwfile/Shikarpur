@@ -59,7 +59,7 @@
             max-width: 950px; 
             margin: 0 auto; 
             background: #fffdf9; 
-            padding: 8px 10px; 
+            padding: 6px 8px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
             border-top: 4px solid var(--gold-piping);
             border-bottom: 4px solid var(--gold-piping);
@@ -67,71 +67,71 @@
             position: relative; 
         }
         
-        /* Uniform Style Top Banner */
+        /* Uniform Style Top Banner (Reduced Spacing) */
         .brand-banner {
             background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon-main) 50%, var(--maroon-dark) 100%);
             border: 2px solid var(--gold-piping);
-            border-radius: 8px;
-            padding: 8px 10px;
-            margin-bottom: 8px;
+            border-radius: 6px;
+            padding: 5px 8px;
+            margin-bottom: 4px;
             text-align: center;
             position: relative;
-            box-shadow: 0 3px 6px rgba(99, 16, 22, 0.35);
+            box-shadow: 0 2px 4px rgba(99, 16, 22, 0.35);
         }
         .brand-stars {
             color: var(--gold-piping);
-            font-size: 11px;
-            letter-spacing: 4px;
-            margin-bottom: 2px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            margin-bottom: 1px;
         }
         .brand-title-main {
-            font-size: clamp(18px, 4.5vw, 27px);
+            font-size: clamp(16px, 4vw, 24px);
             font-weight: 900;
             color: var(--gold-piping);
             text-transform: uppercase;
             letter-spacing: 0.8px;
             margin: 0;
-            line-height: 1.15;
+            line-height: 1.1;
             text-shadow: 
                 0 1px 0 #7a5200,
-                0 2px 4px rgba(0, 0, 0, 0.7);
+                0 2px 3px rgba(0, 0, 0, 0.7);
         }
         .brand-subtitle-ribbon {
             display: inline-block;
             background-color: var(--ribbon-red);
             color: #ffffff;
-            font-size: clamp(10px, 2.5vw, 13px);
+            font-size: clamp(9px, 2.2vw, 12px);
             font-weight: bold;
-            padding: 2px 14px;
-            border-radius: 12px;
+            padding: 1px 10px;
+            border-radius: 10px;
             border: 1px solid var(--gold-piping);
-            margin-top: 4px;
+            margin-top: 2px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
-        /* Account & Controls Row */
+        /* Account & Controls Row (Reduced Margins) */
         .account-select-group { 
             display: flex; 
             align-items: center; 
             justify-content: space-between;
-            gap: 8px; 
+            gap: 6px; 
             width: 100%;
-            margin-bottom: 8px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #f0e1c6;
+            margin-bottom: 4px;
+            padding-bottom: 4px;
+            border-bottom: 1.5px solid #f0e1c6;
             flex-wrap: wrap;
         }
         .account-select-group label {
-            font-size: 13px; 
+            font-size: 12px; 
             font-weight: bold; 
             color: var(--maroon-dark);
             white-space: nowrap;
         }
         .account-select { 
-            padding: 5px 10px; 
-            font-size: clamp(12px, 0.8vw + 8px, 14px); 
+            padding: 4px 8px; 
+            font-size: clamp(12px, 0.8vw + 8px, 13px); 
             border-radius: 4px; 
             border: 1.5px solid var(--maroon-main); 
             background-color: var(--gold-light); 
@@ -141,16 +141,16 @@
             outline: none;
         }
 
-        /* Export & Language Buttons */
+        /* Export & Language Buttons (Reduced Margins) */
         .export-btn-group {
             display: flex;
-            gap: 6px;
-            margin-bottom: 8px;
+            gap: 5px;
+            margin-bottom: 4px;
             width: 100%;
         }
         .export-btn {
             flex: 1;
-            padding: 6px 2px;
+            padding: 5px 2px;
             border: 1px solid rgba(245, 176, 18, 0.5);
             border-radius: 4px;
             color: #ffffff;
@@ -158,7 +158,7 @@
             font-size: 11px;
             cursor: pointer;
             text-align: center;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
             transition: opacity 0.2s;
         }
         .export-btn:hover { opacity: 0.9; }
@@ -166,21 +166,21 @@
         .btn-pdf { background-color: #b81c24; }
         .btn-jpg { background-color: #b37400; }
 
-        /* Summary Cards */
+        /* Summary Cards (Tightened padding & gap) */
         .summary-cards {
             display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 5px;
+            margin-bottom: 4px;
             width: 100%;
         }
         .summary-card {
             flex: 1;
-            padding: 6px 4px;
-            border-radius: 6px;
+            padding: 4px 3px;
+            border-radius: 5px;
             text-align: center;
             color: white;
-            border-bottom: 3px solid var(--gold-piping);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+            border-bottom: 2.5px solid var(--gold-piping);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
         }
         .card-received { background: linear-gradient(135deg, #1b6b36, #288f4a); }
         .card-sent { background: linear-gradient(135deg, var(--maroon-dark), var(--maroon-light)); }
@@ -190,8 +190,8 @@
         .card-partner-exp { background: linear-gradient(135deg, #9c3c08, #c75212); }
         .card-net-calc { background: linear-gradient(135deg, #0d695b, #158f7d); }
 
-        .summary-card h4 { margin: 1px 0 0 0; font-size: 11px; text-transform: uppercase; }
-        .summary-card p { margin: 3px 0 0 0; font-size: 14px; font-weight: bold; }
+        .summary-card h4 { margin: 1px 0 0 0; font-size: 10px; text-transform: uppercase; }
+        .summary-card p { margin: 2px 0 0 0; font-size: 13px; font-weight: bold; }
 
         /* Table Portion */
         .table-portion { 
@@ -207,13 +207,13 @@
         }
         table { 
             width: 100%; 
-            min-width: 445px; 
+            min-width: 480px; 
             border-collapse: collapse; 
             table-layout: fixed;
         }
         th, td { 
             border: 1px solid #e6d3b3; 
-            padding: 5px 3px; 
+            padding: 4px 3px; 
             text-align: center; 
             font-size: 11px !important; 
             vertical-align: middle; 
@@ -231,9 +231,9 @@
         }
         tr:nth-child(even) { background-color: #fdf6e9; }
         tr:nth-child(odd) { background-color: #ffffff; }
-        tbody tr { height: 32px; }
+        tbody tr { height: 30px; }
 
-        .date-cell { line-height: 1.15; white-space: normal; }
+        .date-cell { line-height: 1.15; white-space: nowrap; font-size: 10px !important; }
         
         .text-right { text-align: right !important; padding-right: 6px !important; }
         .text-left { text-align: left !important; padding-left: 6px !important; }
@@ -266,7 +266,7 @@
         .inline-edit-input {
             width: 100% !important;
             height: 100% !important;
-            padding: 3px 2px !important;
+            padding: 2px !important;
             border: 2px solid var(--maroon-main) !important;
             border-radius: 2px !important;
             font-size: inherit !important;
@@ -285,7 +285,7 @@
         tfoot td {
             background-color: var(--gold-light);
             border-top: 2px solid var(--maroon-main);
-            padding: 4px 2px !important;
+            padding: 3px 2px !important;
         }
         .add-row-form input {
             width: 100% !important;
@@ -309,13 +309,13 @@
             background-color: var(--maroon-main); 
             color: var(--gold-piping); 
             border: 1px solid var(--gold-piping); 
-            padding: 4px 6px; 
+            padding: 3px 6px; 
             border-radius: 4px; 
             cursor: pointer; 
             font-weight: bold; 
             width: 100%; 
             font-size: 11px; 
-            box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
         }
         .add-btn:hover { background-color: var(--maroon-dark); }
 
@@ -349,23 +349,23 @@
             background: var(--maroon-main);
             color: var(--gold-piping);
             border-bottom: 2px solid var(--gold-piping);
-            padding: 10px 14px;
+            padding: 8px 12px;
             display: flex; justify-content: space-between; align-items: center;
-            font-size: 15px; font-weight: bold;
+            font-size: 14px; font-weight: bold;
         }
         .modal-close-btn {
             background: none; border: none; color: var(--gold-piping);
-            font-size: 20px; cursor: pointer; line-height: 1;
+            font-size: 18px; cursor: pointer; line-height: 1;
         }
         .modal-body {
-            padding: 14px;
-            display: flex; flex-direction: column; gap: 10px;
+            padding: 10px 12px;
+            display: flex; flex-direction: column; gap: 8px;
         }
-        .modal-group { display: flex; flex-direction: column; gap: 3px; }
+        .modal-group { display: flex; flex-direction: column; gap: 2px; }
         .modal-group label { font-size: 11px; font-weight: bold; color: var(--maroon-dark); text-transform: uppercase; }
         .modal-input {
-            padding: 8px; border: 1px solid #c9b497; border-radius: 4px;
-            font-size: 13px; outline: none; width: 100%;
+            padding: 6px 8px; border: 1px solid #c9b497; border-radius: 4px;
+            font-size: 12px; outline: none; width: 100%;
         }
         .modal-input:focus { border-color: var(--maroon-main); }
         
@@ -375,25 +375,25 @@
         }
 
         .modal-footer {
-            padding: 10px 14px; background: var(--gold-light);
+            padding: 8px 12px; background: var(--gold-light);
             border-top: 1px solid #e6d3b3;
-            display: flex; justify-content: flex-end; gap: 8px;
+            display: flex; justify-content: flex-end; gap: 6px;
         }
         .modal-btn-cancel {
             background: #ffffff; border: 1px solid #ccc; color: #333;
-            padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px;
+            padding: 5px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px;
         }
         .modal-btn-save {
             background: var(--maroon-main); border: 1px solid var(--gold-piping); color: var(--gold-piping);
-            padding: 6px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px;
+            padding: 5px 14px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px;
         }
 
         .footer-text { 
             text-align: center; 
-            font-size: clamp(11px, 0.6vw + 7px, 13px); 
+            font-size: clamp(10px, 0.5vw + 6px, 12px); 
             font-weight: bold; 
             color: var(--maroon-main); 
-            margin-top: 8px; 
+            margin-top: 4px; 
             margin-bottom: 2px; 
         }
 
@@ -401,7 +401,7 @@
         .export-mode {
             height: auto !important;
             overflow: visible !important;
-            padding: 10px !important;
+            padding: 8px !important;
             width: 500px !important; 
             max-width: 500px !important;
             margin: 0 auto !important;
@@ -417,7 +417,7 @@
         }
         .export-mode table {
             width: 100% !important;
-            min-width: 445px !important; 
+            min-width: 480px !important; 
         }
     </style>
 </head>
@@ -442,7 +442,7 @@
                         <option value="Full Detail" data-i18n="opt-full">Full Detail</option>
                     </select>
                 </div>
-                <button type="button" id="open-add-modal-btn" class="add-btn" style="width: auto; padding: 5px 12px;" data-i18n="add-btn">+ Add New Entry</button>
+                <button type="button" id="open-add-modal-btn" class="add-btn" style="width: auto; padding: 4px 10px;" data-i18n="add-btn">+ Add New Entry</button>
             </div>
 
             <!-- Export & Language Buttons -->
@@ -456,17 +456,17 @@
             <!-- Summary Totals (1st line cards) -->
             <div class="summary-cards" id="summary-cards-container">
                 <div class="summary-card card-received" id="card-1">
-                    <span style="font-size: 10px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-1">MAIN ACCOUNT</span>
+                    <span style="font-size: 9px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-1">MAIN ACCOUNT</span>
                     <h4 data-i18n="t-rec">Total Received</h4>
                     <p id="total-received">0</p>
                 </div>
                 <div class="summary-card card-sent" id="card-2">
-                    <span style="font-size: 10px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-2">MAIN ACCOUNT</span>
+                    <span style="font-size: 9px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-2">MAIN ACCOUNT</span>
                     <h4 data-i18n="t-snt">Total Sent</h4>
                     <p id="total-sent">0</p>
                 </div>
                 <div class="summary-card card-total" id="card-3">
-                    <span style="font-size: 10px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-3">MAIN ACCOUNT</span>
+                    <span style="font-size: 9px; opacity: 0.9; display: block; font-weight: bold; letter-spacing: 0.5px;" data-i18n="m-acc-3">MAIN ACCOUNT</span>
                     <h4 data-i18n="bal">Balance</h4>
                     <p id="total-balance">0</p>
                 </div>
@@ -494,12 +494,12 @@
             <table id="main-view-table">
                 <thead>
                     <tr id="table-header-row">
-                        <th style="width: 7%;" data-i18n="th-sno">Sr.No</th>
+                        <th style="width: 6%;" data-i18n="th-sno">Sr.No</th>
                         <th style="width: 9%;" data-i18n="th-dt">Date</th>
-                        <th style="width: 31%;" class="th-desc-header" data-i18n="th-ds">Description</th>
-                        <th style="width: 17%;" class="text-right" data-i18n="th-ar">Amount<br>Received</th>
-                        <th style="width: 17%;" class="text-right" data-i18n="th-as">Amount<br>Send</th>
-                        <th style="width: 19%;" class="text-right" data-i18n="th-to">Total</th>
+                        <th style="width: 23%;" class="th-desc-header" data-i18n="th-ds">Description</th>
+                        <th style="width: 17%;" class="text-right" data-i18n="th-ar">Amount Received</th>
+                        <th style="width: 17%;" class="text-right" data-i18n="th-as">Amount Send</th>
+                        <th style="width: 18%;" class="text-right" data-i18n="th-to">Total</th>
                         <th style="width: 10%;" data-i18n="th-ac" id="action-header">Action</th>
                     </tr>
                 </thead>
@@ -640,7 +640,10 @@
             if (!dateStr) return '-';
             const parts = dateStr.split('-');
             if (parts.length === 3) {
-                return `${parts[2]}-${parts[1]}<br>${parts[0]}`;
+                const yyyy = parts[0].slice(-2);
+                const mm = parts[1];
+                const dd = parts[2];
+                return `${dd}.${mm}.${yyyy}`;
             }
             return dateStr;
         }
@@ -721,23 +724,23 @@
                 tableFooter.style.display = 'none';
                 openAddModalBtn.style.display = 'none';
                 headerRow.innerHTML = `
-                    <th style="width: 7%;" data-i18n="th-sno">${translations[currentLang]["th-sno"]}</th>
+                    <th style="width: 6%;" data-i18n="th-sno">${translations[currentLang]["th-sno"]}</th>
                     <th style="width: 9%;" data-i18n="th-dt">${translations[currentLang]["th-dt"]}</th>
-                    <th style="width: 31%;" class="th-desc-header" data-i18n="th-ds">${translations[currentLang]["th-ds"]}</th>
+                    <th style="width: 30%;" class="th-desc-header" data-i18n="th-ds">${translations[currentLang]["th-ds"]}</th>
                     <th style="width: 17%;" class="text-right" data-i18n="th-ar">${translations[currentLang]["th-ar"]}</th>
                     <th style="width: 17%;" class="text-right" data-i18n="th-as">${translations[currentLang]["th-as"]}</th>
-                    <th style="width: 19%;" class="text-right" data-i18n="th-to">${translations[currentLang]["th-to"]}</th>
+                    <th style="width: 21%;" class="text-right" data-i18n="th-to">${translations[currentLang]["th-to"]}</th>
                 `;
             } else {
                 tableFooter.style.display = '';
                 openAddModalBtn.style.display = '';
                 headerRow.innerHTML = `
-                    <th style="width: 7%;" data-i18n="th-sno">${translations[currentLang]["th-sno"]}</th>
+                    <th style="width: 6%;" data-i18n="th-sno">${translations[currentLang]["th-sno"]}</th>
                     <th style="width: 9%;" data-i18n="th-dt">${translations[currentLang]["th-dt"]}</th>
-                    <th style="width: 31%;" class="th-desc-header" data-i18n="th-ds">${translations[currentLang]["th-ds"]}</th>
+                    <th style="width: 23%;" class="th-desc-header" data-i18n="th-ds">${translations[currentLang]["th-ds"]}</th>
                     <th style="width: 17%;" class="text-right" data-i18n="th-ar">${translations[currentLang]["th-ar"]}</th>
                     <th style="width: 17%;" class="text-right" data-i18n="th-as">${translations[currentLang]["th-as"]}</th>
-                    <th style="width: 19%;" class="text-right" data-i18n="th-to">${translations[currentLang]["th-to"]}</th>
+                    <th style="width: 18%;" class="text-right" data-i18n="th-to">${translations[currentLang]["th-to"]}</th>
                     <th style="width: 10%;" data-i18n="th-ac" id="action-header">${translations[currentLang]["th-ac"]}</th>
                 `;
             }
@@ -767,7 +770,7 @@
                 
                 const tdDate = document.createElement('td'); 
                 tdDate.className = 'date-cell'; 
-                tdDate.innerHTML = formatDateDisplay(expense.date);
+                tdDate.innerText = formatDateDisplay(expense.date);
                 if (!isFullDetail) makeCellEditable(tdDate, id, 'date', expense.date || '', 'date');
 
                 const tdDesc = document.createElement('td'); 
@@ -951,8 +954,8 @@
                 "th-sno": "Sr.No",
                 "th-dt": "Date",
                 "th-ds": "Description",
-                "th-ar": "Amount<br>Received",
-                "th-as": "Amount<br>Send",
+                "th-ar": "Amount Received",
+                "th-as": "Amount Send",
                 "th-to": "Total",
                 "th-ac": "Action",
                 "add-short": "Add",
@@ -983,8 +986,8 @@
                 "th-sno": "نمبر",
                 "th-dt": "تاریخ",
                 "th-ds": "تفصیل",
-                "th-ar": "وصول<br>رقم",
-                "th-as": "ادا<br>رقم",
+                "th-ar": "وصول رقم",
+                "th-as": "ادا رقم",
                 "th-to": "کل",
                 "th-ac": "عمل",
                 "add-short": "شامل",
