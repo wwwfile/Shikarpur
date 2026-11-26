@@ -67,7 +67,7 @@
             position: relative; 
         }
         
-        /* Uniform Style Top Banner (Reduced Spacing) */
+        /* Uniform Style Top Banner */
         .brand-banner {
             background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon-main) 50%, var(--maroon-dark) 100%);
             border: 2px solid var(--gold-piping);
@@ -111,7 +111,7 @@
             box-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
-        /* Account & Controls Row (Reduced Margins) */
+        /* Account & Controls Row */
         .account-select-group { 
             display: flex; 
             align-items: center; 
@@ -141,7 +141,7 @@
             outline: none;
         }
 
-        /* Export & Language Buttons (Reduced Margins) */
+        /* Export & Language Buttons */
         .export-btn-group {
             display: flex;
             gap: 5px;
@@ -166,7 +166,7 @@
         .btn-pdf { background-color: #b81c24; }
         .btn-jpg { background-color: #b37400; }
 
-        /* Summary Cards (Tightened padding & gap) */
+        /* Summary Cards */
         .summary-cards {
             display: flex;
             gap: 5px;
@@ -745,9 +745,14 @@
                 `;
             }
 
-            const filteredData = isFullDetail ? allExpensesData : allExpensesData.filter(item => {
+            // Filter by account AND sort by date ascending (chronological order)
+            const filteredData = (isFullDetail ? [...allExpensesData] : allExpensesData.filter(item => {
                 const acc = (item.expense.account || '').toLowerCase().trim();
                 return acc === selectedAccount;
+            })).sort((a, b) => {
+                const dateA = a.expense.date || '';
+                const dateB = b.expense.date || '';
+                return dateA.localeCompare(dateB);
             });
 
             if (filteredData.length === 0) {
